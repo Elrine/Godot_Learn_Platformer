@@ -15,5 +15,6 @@ zoom = Vector2(3, 3)
 
 [node name="Shoot_cooldown" type="Timer" parent="." unique_id=566941697]
 wait_time = 0.5
+one_shot = true
 
 [connection signal="timeout" from="Shoot_cooldown" to="." method="_on_shoot_cooldown_timeout"]
