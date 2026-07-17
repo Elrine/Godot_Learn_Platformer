@@ -27,6 +27,7 @@ func get_input() -> void:
 		velocity.y = -jump_strength
 	if Input.is_action_just_pressed("shoot") and $Shoot_cooldown.time_left == 0:
 		shoot.emit(position, get_local_mouse_position().normalized())
+		$LaserSound.play()
 		$Shoot_cooldown.start(0.5)
 		var tween = get_tree().create_tween()
 		tween.tween_property($Marker, "scale", Vector2(0.1, 0.1), 0.1)

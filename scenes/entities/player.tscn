@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://de5wf7al0hknv" path="res://graphics/characters/player.png" id="2_08t41"]
 [ext_resource type="Texture2D" uid="uid://otyoj5px7yk7" path="res://graphics/ui/crosshair.png" id="3_1ie0h"]
 [ext_resource type="Texture2D" uid="uid://dijla4pisrrw8" path="res://graphics/lights/main.png" id="4_42nxq"]
+[ext_resource type="AudioStream" uid="uid://tkjj51je3two" path="res://audio/laser.wav" id="5_5u6hq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ke0wg"]
 
@@ -117,5 +118,8 @@ texture = ExtResource("3_1ie0h")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=985244943]
 texture = ExtResource("4_42nxq")
+
+[node name="LaserSound" type="AudioStreamPlayer2D" parent="." unique_id=1011592268]
+stream = ExtResource("5_5u6hq")
 
 [connection signal="timeout" from="Shoot_cooldown" to="." method="_on_shoot_cooldown_timeout"]

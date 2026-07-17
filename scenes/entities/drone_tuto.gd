@@ -4,6 +4,7 @@ var direction : Vector2
 var speed := 50
 var player: CharacterBody2D
 var health := 3
+var is_exploding := false
 
 @export var explosion_radius := 30
 
@@ -27,14 +28,16 @@ func _on_collision_area_body_entered(_body: Node2D) -> void:
 
 func take_hit() -> void:
 	health -= 1
-	if health <= 0:
+	if health <= 0 and not is_exploding:
 		explosion()
 	var tween = create_tween()
 	tween.tween_property($AnimatedSprite2D.material, "shader_parameter/Progress", 0, 0.3)
 	tween.tween_property($AnimatedSprite2D.material, "shader_parameter/Progress", 1, 0.5)
 
 func explosion():
+	is_exploding = true
 	speed = 0
+	$ExplosionSound.play()
 	$AnimatedSprite2D.hide()
 	$ExplosionSprite.show()
 	$AnimationPlayer.play("explode")
@@ -44,4 +47,5 @@ func explosion():
 func chain_reaction():
 	for drone in get_tree().get_nodes_in_group("Drones"):
 		if position.distance_to(drone.position) < explosion_radius:
-			drone.explosion()
+			if not drone.is_exploding:
+				drone.explosion()
